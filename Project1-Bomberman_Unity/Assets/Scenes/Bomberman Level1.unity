@@ -276,6 +276,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &718282011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3615902616103930642, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+  m_PrefabInstance: {fileID: 4780172887821974891}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1020786640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2518,6 +2523,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3615902616103930642, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667612825608782461, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4667612825608782461, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: m_Name
+      value: Player Move Point
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780172887954852760, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: m_Radius
+      value: 0.4849049
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780172887954852760, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.012461305
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780172887954852760, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.34010172
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780172887954852761, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: movePoint
+      value: 
+      objectReference: {fileID: 718282011}
+    - target: {fileID: 4780172887954852767, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
+      propertyPath: m_Mass
+      value: 0.7386914
+      objectReference: {fileID: 0}
     - target: {fileID: 5497917191928665532, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
       propertyPath: m_Name
       value: Bomberman
@@ -2528,11 +2565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7322030883943379297, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.04
+      value: -7.076
       objectReference: {fileID: 0}
     - target: {fileID: 7322030883943379297, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.3
+      value: 3.289
       objectReference: {fileID: 0}
     - target: {fileID: 7322030883943379297, guid: b7b01076a59dfa94c8f3f96326f9b1ae, type: 3}
       propertyPath: m_LocalPosition.z

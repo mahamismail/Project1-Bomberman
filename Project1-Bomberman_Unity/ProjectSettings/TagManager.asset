@@ -3,12 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Boulder
+  - Enemy
+  - Left
+  - Right
+  - Bottom
+  - Top
+  - Explosion
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Stage
   - Water
   - UI
   - 
