@@ -5,11 +5,10 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Animator animator;
 
     public float speed = 5f;
     public float health = 1f;
-    
-   
 
     // Public variables for Input Keys to move Player
     public KeyCode inputUp = KeyCode.UpArrow;
@@ -43,13 +42,19 @@ public class PlayerControls : MonoBehaviour
         }
         else if (Input.GetKey(inputRight))
         {
-            direction = Vector2.right;
+            direction = Vector2.right;      
         }
         else 
         {
             direction = Vector2.zero;
-
         };
+
+        /* Reference: 
+        "TOP DOWN MOVEMENT in Unity!" by Brackeys https://www.youtube.com/watch?v=whzomFgjT50&t=27s
+        */
+        animator.SetFloat("Horizontal", direction.x);
+        animator.SetFloat("Vertical", direction.y);
+        animator.SetFloat("Speed", direction.sqrMagnitude);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,7 +62,8 @@ public class PlayerControls : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy") )
         {   
             health = health - 1;
-            Destroy(gameObject);
+            animator.SetBool("Dead", true);
+            Invoke("DestroyPlayer", 1);
             Debug.Log("Enemy killed you");
         }
     }
@@ -67,9 +73,15 @@ public class PlayerControls : MonoBehaviour
         if(col.gameObject.CompareTag("Explosion") )
         {   
             health = health - 1;
-            Destroy(gameObject);
+            animator.SetBool("Dead", true);
+            Invoke("DestroyPlayer", 1);
             Debug.Log("Explosion killed you");
         }
+    }
+
+    private void DestroyPlayer()
+    {
+        Destroy(gameObject);
     }
 
     private void FixedUpdate() // Best to use for physics-related functions
@@ -79,8 +91,4 @@ public class PlayerControls : MonoBehaviour
 
         rb.MovePosition(position + translation);
     }
-
-    
-    
-
 }

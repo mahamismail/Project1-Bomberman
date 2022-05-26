@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
+    private Rigidbody2D rb;
+    public Animator animator;
+
     public float speed = 50; // the actual amount for velocity;
     private float xVel;
     private float yVel;
 
-    private Rigidbody2D rb;
-
-    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.CompareTag("Explosion") )
         {   
-            Destroy(gameObject);
-            Debug.Log("Boulder crumbled");
+            animator.SetBool("Dead", true);
+            Invoke("DestroyEnemy", 1);
+            Debug.Log("Enemy died!");
         }
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
    
 
@@ -62,6 +68,8 @@ public class EnemyPatrol : MonoBehaviour
             yVel = -speed;
             rb.velocity = new Vector2(xVel, yVel);
         }
+
+        
     }
 
     // Start is called before the first frame update
@@ -70,6 +78,7 @@ public class EnemyPatrol : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         enemyMoves();
+
     }
 
     
@@ -154,6 +163,9 @@ public class EnemyPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            animator.SetFloat("Horizontal", rb.velocity.x);
+            animator.SetFloat("Vertical", rb.velocity.y);
+            animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
         
     }
 }

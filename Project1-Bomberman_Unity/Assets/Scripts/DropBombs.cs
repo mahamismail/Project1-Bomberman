@@ -9,7 +9,7 @@ public class DropBombs : MonoBehaviour
     public float bombFuseTime = 3f;
     public int bombAmount = 1;
 
-    public GameObject explosionPrefab; // This makes sure the prefab chosen has the explosion script on it
+    public Explosion explosionPrefab; // This makes sure the prefab chosen has the explosion script on it
     public float explosionDuration = 3f;
     public int explosionRadius = 1;
 
@@ -29,7 +29,6 @@ public class DropBombs : MonoBehaviour
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
 
-
         GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
 
         //Physics.IgnoreCollision(bomb.GetComponent<Collider>(), gameObject.CompareTag("Player").GetComponent<Collider>(), true );
@@ -40,7 +39,7 @@ public class DropBombs : MonoBehaviour
         & make first child of the explosion ACTIVE */
 
         //transform.GetChild(0).explosionPrefab.setActive(true);
-        GameObject explosion = Instantiate(explosionPrefab,position, Quaternion.identity);
+        Explosion explosion = Instantiate(explosionPrefab,position, Quaternion.identity);
         Destroy(explosion.gameObject, explosionDuration);      
 
         /*
