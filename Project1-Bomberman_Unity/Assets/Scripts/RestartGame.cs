@@ -8,11 +8,12 @@ public class RestartGame : MonoBehaviour
 {
     public KeyCode restartGame = KeyCode.R;
 
+
     void Update()
     {
         if (Input.GetKey(restartGame))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the scene again
         }
         
     }

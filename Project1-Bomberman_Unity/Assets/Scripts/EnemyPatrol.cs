@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyPatrol : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -11,17 +12,12 @@ public class EnemyPatrol : MonoBehaviour
     private float xVel;
     private float yVel;
 
-    /* private void OnTriggerEnter2D(Collider2D col)
-    {
-        if(col.gameObject.CompareTag("Explosion") )
-        {   
-            animator.SetBool("Dead", true);
-            Destroy(gameObject, 2f);
-            Debug.Log("Enemy died!");
-        }
-    }
-    */
-
+    
+   /*** ENEMY MOVES
+    The enemy moves at random back and forth on collision with the boulders on the tilemap.
+    Also tried to get enemies to change axis as well, but was unable to execute using similar code as written below. 
+    Was unable to give this more time, though RayCast would have been the next option
+    ***/
     void enemyMoves()
     {
         float rand = Random.Range(0, 4);
@@ -76,7 +72,6 @@ public class EnemyPatrol : MonoBehaviour
 
     }
 
-    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision!");
@@ -88,72 +83,6 @@ public class EnemyPatrol : MonoBehaviour
             Debug.Log("Direction changed!");
         }
     }
-
-
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Collision!");
-        if(collision.gameObject.CompareTag("Boulder"))
-        {
-            
-            if (yVel == 0)
-            {
-                float num = Random.Range(0, 3);
-
-                if (num < 1)
-                {
-                    Debug.Log("0");
-                    xVel = -xVel;
-                    rb.velocity = new Vector2(xVel, yVel);
-
-                }
-                else if (num < 2 && num >= 1)
-                {
-                    Debug.Log("1");
-                    xVel = 0;
-                    yVel = speed;
-                    rb.velocity = new Vector2(xVel, yVel);
-                }
-                else if (num < 3 && num >= 2)
-                {
-                    Debug.Log("2");
-                    xVel = 0;
-                    yVel = -speed;
-                    rb.velocity = new Vector2(xVel, yVel);
-                }
-            } 
-            else if (xVel == 0)
-            {
-                float num = Random.Range(0, 3);
-
-                if (num < 1)
-                {
-                    Debug.Log("3");
-                    yVel = -yVel;
-                    rb.velocity = new Vector2(xVel, yVel);
-
-                }
-                else if (num < 2 && num >= 1)
-                {
-                    Debug.Log("4");
-                    xVel = speed;
-                    yVel = 0;
-                    rb.velocity = new Vector2(xVel, yVel);
-                }
-                else if (num < 3 && num >= 2)
-                {
-                    Debug.Log("5");
-                    xVel = -speed;
-                    yVel = 0;
-                    rb.velocity = new Vector2(xVel, yVel);
-                }
-            }
-        }
-    }
-    */
-
-   
 
     // Update is called once per frame
     void Update()

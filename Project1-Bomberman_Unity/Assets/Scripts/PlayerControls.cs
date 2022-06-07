@@ -19,13 +19,12 @@ public class PlayerControls : MonoBehaviour
 
     private Vector2 direction = Vector2.down; // default direction of the player. (front facing)
 
-    // Start is called before the first frame update
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // getting the rigidbody
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Player movement on pressing keys 
@@ -53,28 +52,28 @@ public class PlayerControls : MonoBehaviour
         /* Reference: 
         "TOP DOWN MOVEMENT in Unity!" by Brackeys https://www.youtube.com/watch?v=whzomFgjT50&t=27s
         */
-        animator.SetFloat("Horizontal", direction.x);
-        animator.SetFloat("Vertical", direction.y);
-        animator.SetFloat("Speed", direction.sqrMagnitude);
+        animator.SetFloat("Horizontal", direction.x); // if this variable changes, player moves along x axis
+        animator.SetFloat("Vertical", direction.y); // if this variable changes, player moves along y axis
+        animator.SetFloat("Speed", direction.sqrMagnitude); // if this variable is > 0, animations according to the horizontal and vertical variables changes.
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy") )
+        if(collision.gameObject.CompareTag("Enemy") ) // On collision with Enemy
         {   
-            animator.SetBool("Dead", true);
-            Destroy(gameObject, 1.5f);
+            animator.SetBool("Dead", true); // start death animation
+            Destroy(gameObject, 1.5f); // remove object
             Debug.Log("Enemy killed you");
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.CompareTag("Explosion") )
+        if(col.gameObject.CompareTag("Explosion") ) // On collision with Explosion
         {   
-            animator.SetBool("Dead", true);
-            Destroy(gameObject, 2f);
+            animator.SetBool("Dead", true); // start death animation
+            Destroy(gameObject, 1.5f);  // remove object
             Debug.Log("Explosion killed you");
         }
     }
