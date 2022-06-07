@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -8,13 +9,13 @@ public class PlayerControls : MonoBehaviour
     public Animator animator;
 
     public float speed = 5f;
-    public float health = 1f;
 
     // Public variables for Input Keys to move Player
     public KeyCode inputUp = KeyCode.UpArrow;
     public KeyCode inputDown = KeyCode.DownArrow;
     public KeyCode inputLeft = KeyCode.LeftArrow;
     public KeyCode inputRight = KeyCode.RightArrow;
+    public KeyCode restartGame = KeyCode.R;
 
     private Vector2 direction = Vector2.down; // default direction of the player. (front facing)
 
@@ -55,15 +56,15 @@ public class PlayerControls : MonoBehaviour
         animator.SetFloat("Horizontal", direction.x);
         animator.SetFloat("Vertical", direction.y);
         animator.SetFloat("Speed", direction.sqrMagnitude);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Enemy") )
         {   
-            health = health - 1;
             animator.SetBool("Dead", true);
-            Invoke("DestroyPlayer", 1);
+            Destroy(gameObject, 1.5f);
             Debug.Log("Enemy killed you");
         }
     }
@@ -72,16 +73,10 @@ public class PlayerControls : MonoBehaviour
     {
         if(col.gameObject.CompareTag("Explosion") )
         {   
-            health = health - 1;
             animator.SetBool("Dead", true);
-            Invoke("DestroyPlayer", 1);
+            Destroy(gameObject, 2f);
             Debug.Log("Explosion killed you");
         }
-    }
-
-    private void DestroyPlayer()
-    {
-        Destroy(gameObject);
     }
 
     private void FixedUpdate() // Best to use for physics-related functions

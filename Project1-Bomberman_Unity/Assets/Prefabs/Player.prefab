@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 3965659515099134349}
   - component: {fileID: 3965659515099134339}
   - component: {fileID: 3965659515099134336}
-  - component: {fileID: 3965659515099134348}
-  - component: {fileID: 864206280822973998}
-  - component: {fileID: 6619407943355880828}
   - component: {fileID: 1270882132790996114}
   m_Layer: 0
   m_Name: Player
@@ -68,73 +65,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.03702438, y: -0.32087934}
   serializedVersion: 2
   m_Radius: 0.46614516
---- !u!114 &3965659515099134348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3965659515099134337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8397d909a949eb0468f9fc9502cad571, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  speed: 5
-  health: 5
-  inputUp: 273
-  inputDown: 274
-  inputLeft: 276
-  inputRight: 275
---- !u!114 &864206280822973998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3965659515099134337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb0ec178d9a01f34d87750623f0268e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 4663961176674366439, guid: c1ce2846a92a1104292c4dfa9e3cac73, type: 3}
-  inputKey: 32
-  bombFuseTime: 3
-  bombAmount: 1
-  explosionPrefab: {fileID: 4022146332793098397, guid: db16cbd1fd928d54b96c25c2688492b1, type: 3}
-  explosionDuration: 3
-  explosionRadius: 3
-  explosionLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
---- !u!95 &6619407943355880828
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3965659515099134337}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bff205a6efe3dae4a904bdb3b26b32eb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1270882132790996114
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -175,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 457474356617978424, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

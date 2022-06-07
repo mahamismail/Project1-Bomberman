@@ -1,6 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEditor.Tilemaps;
 
 public class DropBombs : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class DropBombs : MonoBehaviour
     public float bombFuseTime = 3f;
     public int bombAmount = 1;
 
-    public Explosion explosionPrefab; // This makes sure the prefab chosen has the explosion script on it
-    public float explosionDuration = 3f;
+    public GameObject explosionPrefab;
+    public GameObject explosionEndPrefab;
+    public float explosionDuration = 1f;
     public int explosionRadius = 1;
-
     public LayerMask explosionLayerMask;
+    public GameObject destructiblePrefab;
+    public Tilemap destructibleTiles;
+
 
     private void Update()
     {
@@ -25,60 +29,68 @@ public class DropBombs : MonoBehaviour
 
     private IEnumerator DropBomb()
     {
+        
         Vector2 position = transform.position;
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
 
         GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
 
-        //Physics.IgnoreCollision(bomb.GetComponent<Collider>(), gameObject.CompareTag("Player").GetComponent<Collider>(), true );
         yield return new WaitForSeconds(bombFuseTime);
-        Destroy(bomb);
+
+        position = bomb.transform.position;
+        position.x = Mathf.Round(position.x);
+        position.y = Mathf.Round(position.y);
 
         /* When bomb is triggered, instantiate the explosion
         & make first child of the explosion ACTIVE */
+        
+       GameObject explosion = Instantiate(explosionPrefab,position, Quaternion.identity);
+       Destroy(explosion.gameObject, explosionDuration);
 
-        //transform.GetChild(0).explosionPrefab.setActive(true);
-        Explosion explosion = Instantiate(explosionPrefab,position, Quaternion.identity);
-        Destroy(explosion.gameObject, explosionDuration);      
+        Explode(position + new Vector2Int(1,0), Quaternion.identity);
+        Explode(position + new Vector2Int(-1,0), Quaternion.identity);
+        Explode(position + new Vector2Int(0,1), Quaternion.identity);
+        Explode(position + new Vector2Int(0,-1), Quaternion.identity);
 
-        /*
-        Explode(position,Vector2.up, explosionRadius);
-        Explode(position,Vector2.down, explosionRadius);
-        Explode(position,Vector2.left, explosionRadius);
-        Explode(position,Vector2.right, explosionRadius);
-        */   
+        
+        Destroy(bomb.gameObject);
+        
     }
 
+    /*This function instantiates explosions around the bomb, extending vertically
+    and horizontally from the middle of the explosion */
 
-    /*
-
-    /* This function instantiates explosions around the bomb, extending vertically
-    and horizontally from the middle of the explosion
-    *\
-
-    private void Explode(Vector2 position, Vector2 direction, int length)
+    private void Explode(Vector2 position, Quaternion direction)
     {
-        if (length <= 0) {
+        if (Physics2D.OverlapBox(position, Vector2.one / 2f, 0f, explosionLayerMask))
+        {
+            Debug.Log("Boulder hit");
+            ClearDestructible(position);
             return;
         }
-
-        position += direction;
-
-        if(Physics2D.OverlapBox(position, Vector2.one, 0f, explosionLayerMask)
-
-        GameObject explosion = Instantiate(explosionPrefab,position, Quaternion.identity);
-        
-        if (length > 1){
-            // set the second child of explosion ACTIVE
-        }
-        else 
-        {
-            // set the third/last child of explosion ACTIVE
-
-        }
-
-        Destroy(explosion.gameObject, explosionDuration);
+            
+            GameObject explosion = Instantiate(explosionPrefab,position, direction);
+            Destroy(explosion.gameObject, explosionDuration);
+            
     }
-    */
+
+    private void ClearDestructible(Vector2 position)
+    {
+        Vector3Int cell = destructibleTiles.WorldToCell(position);
+        TileBase tile = destructibleTiles.GetTile(cell);
+
+        if (tile != null)
+        {
+            Instantiate(destructiblePrefab, position, Quaternion.identity);
+            destructibleTiles.SetTile(cell, null);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Bomb")) {
+            other.isTrigger = false;
+        }
+    }
 }

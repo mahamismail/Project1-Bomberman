@@ -11,6 +11,7 @@ TagManager:
   - Bottom
   - Top
   - Explosion
+  - Destructibles
   layers:
   - Default
   - TransparentFX
@@ -18,9 +19,9 @@ TagManager:
   - Stage
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Destructible
+  - Indestructible
+  - Bomb
   - 
   - 
   - 

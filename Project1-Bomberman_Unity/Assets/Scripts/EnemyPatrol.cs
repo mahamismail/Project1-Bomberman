@@ -7,25 +7,20 @@ public class EnemyPatrol : MonoBehaviour
     private Rigidbody2D rb;
     public Animator animator;
 
-    public float speed = 50; // the actual amount for velocity;
+    public float speed = 5; // the actual amount for velocity;
     private float xVel;
     private float yVel;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    /* private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.CompareTag("Explosion") )
         {   
             animator.SetBool("Dead", true);
-            Invoke("DestroyEnemy", 1);
+            Destroy(gameObject, 2f);
             Debug.Log("Enemy died!");
         }
     }
-
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-    }
-   
+    */
 
     void enemyMoves()
     {
@@ -85,7 +80,7 @@ public class EnemyPatrol : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision!");
-        if(collision.gameObject.CompareTag("Boulder"))
+        if(collision.gameObject.CompareTag("Boulder") || collision.gameObject.CompareTag("Player")  )
         {   
             xVel= -xVel;
             yVel= -yVel;

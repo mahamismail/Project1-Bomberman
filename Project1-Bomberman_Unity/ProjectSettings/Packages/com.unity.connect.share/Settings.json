@@ -21,7 +21,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"D:/GitHub/Project1-Bomberman/Project1-Bomberman_Unity/WebGL Builds;;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/maham/Downloads/Project1-Bomberman-main (1)/Project1-Bomberman-main/Project1-Bomberman_Unity/WebGL Builds;D:/GitHub/Project1-Bomberman/Project1-Bomberman_Unity/WebGL Builds;;;;;;;;\"}"
             }
         ]
     }
