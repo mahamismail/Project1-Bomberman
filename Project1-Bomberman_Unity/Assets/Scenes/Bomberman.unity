@@ -2958,7 +2958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -138, y: 0}
+  m_AnchoredPosition: {x: -89, y: 15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428571703
@@ -4206,14 +4206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0ec178d9a01f34d87750623f0268e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 4663961176674366439, guid: c1ce2846a92a1104292c4dfa9e3cac73, type: 3}
   inputKey: 32
+  bombPrefab: {fileID: 4663961176674366439, guid: c1ce2846a92a1104292c4dfa9e3cac73, type: 3}
   bombFuseTime: 3
-  bombAmount: 1
   explosionPrefab: {fileID: 4022146332793098397, guid: a640c0d162ffa1949be935b20d6f2d73, type: 3}
-  explosionEndPrefab: {fileID: 4022146332793098397, guid: db16cbd1fd928d54b96c25c2688492b1, type: 3}
   explosionDuration: 1
-  explosionRadius: 1
   explosionLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -4396,7 +4393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 148.10004, y: 206.8}
+  m_AnchoredPosition: {x: 97, y: 55}
   m_SizeDelta: {x: 160.20004, y: 73.600006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1625227617
