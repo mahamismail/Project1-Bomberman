@@ -17,11 +17,8 @@ public class EnemyPatrol : MonoBehaviour
 
     
    /*** ENEMY MOVES
-    The enemy moves at random back and forth on collision with the boulders on the tilemap.
-    Also tried to get enemies to change axis as well, but was unable to execute using similar code as written below. 
-    Was unable to give this more time, though RayCast would have been the next option
+    The enemy can randomly move in any of the 4 directions.
     ***/
-
    void enemyMoves()
    {
         int rand = Random.Range(0, 4);
@@ -30,7 +27,6 @@ public class EnemyPatrol : MonoBehaviour
         {
             case 0:
                 Debug.Log("Going up");
-             //rb.AddForce(new Vector2(0, 50));
 
                 xVel = 0;
                 yVel = speed;
@@ -40,7 +36,6 @@ public class EnemyPatrol : MonoBehaviour
             case 1:
 
                 Debug.Log("Going right");
-                //rb.AddForce(new Vector2(50, 0));
 
                 xVel = speed;
                 yVel = 0;
@@ -50,7 +45,6 @@ public class EnemyPatrol : MonoBehaviour
             case 2:
 
                 Debug.Log("Going left");
-                //rb.AddForce(new Vector2(-50, 0));
 
                 xVel = -speed;
                 yVel = 0;
@@ -60,7 +54,6 @@ public class EnemyPatrol : MonoBehaviour
             case 3:
 
                 Debug.Log("Going down");
-                //rb.AddForce(new Vector2(0, -50));
 
                 xVel = 0;
                 yVel = -speed;
@@ -77,24 +70,32 @@ public class EnemyPatrol : MonoBehaviour
         enemyMoves();
     }
 
+
+    /*** ASSIGN RANDOM MOVEMENT
+    This allows the enemy to switch its direction.
+
+
+    ISSUES: Enemies successfully switch directions upon collision when this is called, but the objects halts at a certain point, 
+    unable to understand why. Was unable to give much time to this particular problem.
+    ***/
     private void assignRandomMovement()
     {
         int rand = Random.Range(0, 3);
 
         switch (rand)
         {
-            case 0:
+            case 0: // switch to opposite direction
                 xVel= -xVel;
                 yVel= -yVel;
                 rb.velocity = new Vector2(xVel, yVel);
                 Debug.Log("Direction changed!");
                 break;
 
-            case 1:
+            case 1: // switch to perpendicular direction
                 rb.velocity = new Vector2(yVel, xVel);
                 break;
 
-            case 2:
+            case 2: // switch to opposite perpendicular direction
                 xVel= -xVel;
                 yVel= -yVel;
                 rb.velocity = new Vector2(yVel, xVel);
@@ -118,59 +119,6 @@ public class EnemyPatrol : MonoBehaviour
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
-        
     }
     
-   /*** ENEMY MOVES
-    The enemy moves at random back and forth on collision with the boulders on the tilemap.
-    Also tried to get enemies to change axis as well, but was unable to execute using similar code as written below. 
-    Was unable to give this more time, though RayCast would have been the next option
-    ***/
-    
-    /*
-    void enemyMoves()
-    {
-        float rand = Random.Range(0, 4);
-
-        if (rand < 1)
-        {
-            Debug.Log("Going up");
-            //rb.AddForce(new Vector2(0, 50));
-
-            xVel = 0;
-            yVel = speed;
-            rb.velocity = new Vector2(xVel, yVel);
-
-        }
-        else if (rand < 2 && rand >= 1)
-        {
-            Debug.Log("Going right");
-            //rb.AddForce(new Vector2(50, 0));
-
-            xVel = speed;
-            yVel = 0;
-            rb.velocity = new Vector2(xVel, yVel);
-        }
-        else if (rand < 3 && rand >= 2)
-        {
-            Debug.Log("Going left");
-            //rb.AddForce(new Vector2(-50, 0));
-
-            xVel = -speed;
-            yVel = 0;
-            rb.velocity = new Vector2(xVel, yVel);
-        }
-        else
-        {
-            Debug.Log("Going down");
-            //rb.AddForce(new Vector2(0, -50));
-
-            xVel = 0;
-            yVel = -speed;
-            rb.velocity = new Vector2(xVel, yVel);
-        }
-    }
-
-   
-    */
 }
