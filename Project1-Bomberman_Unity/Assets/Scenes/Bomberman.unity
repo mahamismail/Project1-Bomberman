@@ -4229,7 +4229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1354092669}
-  speed: 5
+  speed: 2
   inputUp: 273
   inputDown: 274
   inputLeft: 276
@@ -4698,5 +4698,6 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 33284774}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1356071137818879633, guid: 80e28cfbf2562ed439e3b122e4f50fae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 80e28cfbf2562ed439e3b122e4f50fae, type: 3}

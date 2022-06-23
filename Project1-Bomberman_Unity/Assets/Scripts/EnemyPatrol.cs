@@ -5,149 +5,121 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
+    
     private Rigidbody2D rb;
+    public enum Movement { Up, Down, Left, Right }
+    public Movement direction;
     public Animator animator;
 
-    public float speed = 5; // the actual amount for velocity;
- 
-    //Creates a Ray from this object in these directions
-    Ray2D ray_Up;
-    Ray2D ray_Down;
-    Ray2D ray_Left;
-    Ray2D ray_Right;
+    public float speed = 2; // the actual amount for velocity;
+    private float xVel;
+    private float yVel;
 
-    //Container for hit data
-    RaycastHit2D hitData;
+    
+   /*** ENEMY MOVES
+    The enemy moves at random back and forth on collision with the boulders on the tilemap.
+    Also tried to get enemies to change axis as well, but was unable to execute using similar code as written below. 
+    Was unable to give this more time, though RayCast would have been the next option
+    ***/
 
-    private enum Movement {Up, Down, Left, Right}
-    private Movement direction;
+   void enemyMoves()
+   {
+        int rand = Random.Range(0, 4);
 
-     // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        AssignRandomMovement();
-    }
-
-    void Update()
-    {
-        CastRays();
-
-        if (direction == Movement.Up)
-        {
-            Debug.Log("Going up");
-            MoveUp();
-        }
-        else if(direction == Movement.Down)
-        {
-            Debug.Log("Going down");
-            MoveDown();
-        }
-        else if (direction == Movement.Right)
-        {
-            Debug.Log("Going right");
-            MoveRight();
-        }
-        else if (direction == Movement.Left)
-        {
-            Debug.Log("Going left");
-            MoveLeft();
-        };
-
-        //animator.SetFloat("Horizontal", rb.velocity.x);
-        //animator.SetFloat("Vertical", rb.velocity.y);
-        //animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
-    }
-
-    private void CastRays() 
-    {
-        ray_Up = new Ray2D(transform.position, (Vector2.up));
-        ray_Down = new Ray2D(transform.position, (Vector2.down));
-        ray_Left = new Ray2D(transform.position, (Vector2.left)); 
-        ray_Right = new Ray2D(transform.position, (Vector2.right));
-    }
-
-    // Assigns Random Movement to the ENEMY
-    private void AssignRandomMovement()
-    {
-        int rand = Random.Range(0,4);
-        switch(rand)
+        switch (rand)
         {
             case 0:
-                direction = Movement.Up;
+                Debug.Log("Going up");
+             //rb.AddForce(new Vector2(0, 50));
+
+                xVel = 0;
+                yVel = speed;
+                rb.velocity = new Vector2(xVel, yVel);
                 break;
 
             case 1:
-                direction = Movement.Down;
+
+                Debug.Log("Going right");
+                //rb.AddForce(new Vector2(50, 0));
+
+                xVel = speed;
+                yVel = 0;
+                rb.velocity = new Vector2(xVel, yVel);
                 break;
 
             case 2:
-                direction = Movement.Right;
+
+                Debug.Log("Going left");
+                //rb.AddForce(new Vector2(-50, 0));
+
+                xVel = -speed;
+                yVel = 0;
+                rb.velocity = new Vector2(xVel, yVel);
                 break;
 
             case 3:
-                direction = Movement.Left;
+
+                Debug.Log("Going down");
+                //rb.AddForce(new Vector2(0, -50));
+
+                xVel = 0;
+                yVel = -speed;
+                rb.velocity = new Vector2(xVel, yVel);
                 break;
         }
     }
 
-    private void MoveLeft() 
+    // Start is called before the first frame update
+    void Start()
     {
-        transform.Translate(speed * Time.deltaTime * Vector3.left);
-        
-        RaycastHit2D hitData = Physics2D.Raycast(transform.position, Vector2.left, 1);
-            
-        // The Ray hit something!
-        if (hitData.collider.tag == "Boulder" || hitData.collider.tag == "Player" )
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        enemyMoves();
+    }
+
+    private void assignRandomMovement()
+    {
+        int rand = Random.Range(0, 3);
+
+        switch (rand)
         {
-            Debug.Log("Assigning random movement");
-            AssignRandomMovement();
+            case 0:
+                xVel= -xVel;
+                yVel= -yVel;
+                rb.velocity = new Vector2(xVel, yVel);
+                Debug.Log("Direction changed!");
+                break;
+
+            case 1:
+                rb.velocity = new Vector2(yVel, xVel);
+                break;
+
+            case 2:
+                xVel= -xVel;
+                yVel= -yVel;
+                rb.velocity = new Vector2(yVel, xVel);
+                break;
         }
     }
 
-    private void MoveRight() 
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        transform.Translate(speed * Time.deltaTime * Vector3.right);
-        
-        RaycastHit2D hitData = Physics2D.Raycast(transform.position, Vector2.right, 1);
-            
-        // The Ray hit something!
-        if (hitData.collider.tag == "Boulder" || hitData.collider.tag == "Player" )
-        {
-            Debug.Log("Assigning random movement");
-            AssignRandomMovement();
+        Debug.Log("Collision!");
+        if(collision.gameObject.CompareTag("Boulder") || collision.gameObject.CompareTag("Player")  )
+        {   
+            assignRandomMovement();
         }
     }
 
-    private void MoveUp() 
+    // Update is called once per frame
+    void Update()
     {
-        transform.Translate(speed * Time.deltaTime * Vector3.up);
+        Debug.Log(rb.velocity);
+        animator.SetFloat("Horizontal", rb.velocity.x);
+        animator.SetFloat("Vertical", rb.velocity.y);
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
         
-        RaycastHit2D hitData = Physics2D.Raycast(transform.position, Vector2.up, 1);
-            
-        // The Ray hit something!
-        if (hitData.collider.tag == "Boulder" || hitData.collider.tag == "Player" )
-        {
-            Debug.Log("Assigning random movement");
-            AssignRandomMovement();
-        }
     }
-
-    private void MoveDown() 
-    {
-        
-        transform.Translate(speed * Time.deltaTime * Vector3.down);
-        
-        RaycastHit2D hitData = Physics2D.Raycast(transform.position, Vector2.down, 1);
-            
-        // The Ray hit something!
-        if (hitData.collider.tag == "Boulder" || hitData.collider.tag == "Player" )
-        {
-            Debug.Log("Assigning random movement");
-            AssignRandomMovement();
-        }
-    }
-
     
    /*** ENEMY MOVES
     The enemy moves at random back and forth on collision with the boulders on the tilemap.

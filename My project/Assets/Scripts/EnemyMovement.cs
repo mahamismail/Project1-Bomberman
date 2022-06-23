@@ -37,8 +37,6 @@ public class EnemyMovement : MonoBehaviour {
         {
             MoveToLeft();
         }
-
-       
     }
 
     private void CastRays() {
